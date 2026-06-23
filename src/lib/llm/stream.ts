@@ -60,8 +60,8 @@ export async function fetchLLMStream({
       }
     }
     onFinish(fullText);
-  } catch (error: any) {
-    console.error("fetchLLMStream error:", error);
-    onError?.(error);
-  }
+    } catch (error: unknown) {
+      console.error("fetchLLMStream error:", error);
+      onError?.(error instanceof Error ? error : new Error(String(error)));
+    }
 }
